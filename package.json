@@ -1,0 +1,63 @@
+{
+  "name": "elmish-todo",
+  "version": "1.0.0",
+  "description": "To Do app from Elmish Book",
+  "homepage": "https://github.com/mardukbp/elmish-todo-electron",
+  "bugs": {
+    "url": "https://github.com/mardukbp/elmish-todo-electron/issues"
+  },
+  "license": "",
+  "author": "mardukbp",
+  "main": "app/main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mardukbp/elmish-todo-electron.git"
+  },
+  "scripts": {
+    "clean-dev-mac": "sudo killall -9 node && sudo killall -9 dotnet && sudo killall -9 elmish-todo",
+    "clean-dev-win": "taskkill /f /im node.exe && taskkill /f /im dotnet.exe && taskkill /f /im elmish-todo.exe",
+    "compile": "dotnet fable src/Main && dotnet fable src/Renderer",
+    "dev": "dotnet fable watch src/Main --run npm run devrenderer",
+    "devmain": "dotnet fable watch src/Main --run npm run webpackdev",
+    "devrenderer": "dotnet fable watch src/Renderer --run npm run webpackdev",
+    "webpackdev": "electron-webpack dev",
+    "webpack": "electron-webpack",
+    "dist": "npm run compile && npm run webpack &&  electron-builder",
+    "distwin": "npm run compile && electron-webpack && electron-builder -w",
+    "distmac": "npm run compile && electron-webpack && electron-builder -m",
+    "buildonly": "electron-builder"
+  },
+  "electronWebpack": {
+    "main": {
+      "sourceDirectory": "src/Main",
+      "webpackConfig": "webpack.additions.main.js"
+    },
+    "renderer": {
+      "sourceDirectory": "src/Renderer",
+      "webpackConfig": "webpack.additions.renderer.js"
+    },
+    "title": true
+  },
+  "build": {
+    "appId": "elmish-todo",
+    "asar": true,
+    "win": {
+      "target": "zip"
+    }
+  },
+  "dependencies": {
+    "electron-extension-installer": "^1.2.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "bufferutil": "4.0.9",
+    "electron": "35.2.0",
+    "electron-builder": "26.0.13",
+    "electron-webpack": "^2.8.2",
+    "html-webpack-plugin": "^4.3.0",
+    "remotedev": "0.2.9",
+    "utf-8-validate": "6.0.5"
+  },
+  "private": true
+}
