@@ -47,7 +47,6 @@ module DevTools =
         main.Session.defaultSession.removeExtension("Redux DevTools")
         
 
-    let connectRemoteDevViaExtension: unit -> unit = import "connectViaExtension" "remotedev"
 
 
 electron.app.name <- "elmish-todo"
@@ -98,7 +97,6 @@ let createMainWindow () =
 
     if isDev then
         DevTools.installAllDevTools window
-        DevTools.connectRemoteDevViaExtension()
 
         if debug then
             window.webContents.openDevTools()
