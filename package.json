@@ -24,6 +24,7 @@
     "webpack": "electron-webpack",
     "dist": "npm run compile && npm run webpack &&  electron-builder",
     "distwin": "npm run compile && electron-webpack && electron-builder -w --x64",
+    "distmacx64": "npm run compile && electron-webpack && electron-builder -m --x64",
     "distmac": "npm run compile && electron-webpack && electron-builder -m",
     "buildonly": "electron-builder"
   },
